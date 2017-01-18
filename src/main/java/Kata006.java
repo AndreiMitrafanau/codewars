@@ -32,19 +32,14 @@ import java.math.BigInteger;
 
 public class Kata006 {
     public static BigInteger fib(BigInteger n) {
-        return fastFibonacciMatrix(n);
+        BigInteger[] matrix = createInitialMatrix(n);
+        return matrixPow(matrix, n.intValue())[1];
     }
 
-    private static BigInteger fastFibonacciMatrix(BigInteger n) {
-        BigInteger[] m;
-        if (n.signum() < 0) {
-            BigInteger[] matrix = {BigInteger.ZERO, BigInteger.ONE, BigInteger.ONE, BigInteger.ONE.negate()};
-            m = matrix;
-        } else {
-            BigInteger[] matrix = {BigInteger.ONE, BigInteger.ONE, BigInteger.ONE, BigInteger.ZERO};
-            m = matrix;
-        }
-        return matrixPow(m, n.intValue())[1];
+    private static BigInteger[] createInitialMatrix(BigInteger n) {
+        return n.signum() < 0 ?
+                new BigInteger[]{BigInteger.ZERO, BigInteger.ONE, BigInteger.ONE, BigInteger.ONE.negate()} :
+                new BigInteger[]{BigInteger.ONE, BigInteger.ONE, BigInteger.ONE, BigInteger.ZERO};
     }
 
     private static BigInteger[] matrixPow(BigInteger[] matrix, int n) {
