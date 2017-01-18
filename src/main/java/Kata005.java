@@ -16,10 +16,11 @@
 
 public class Kata005 {
     public static boolean scramble(String str1, String str2) {
-        String[] strings = str2.split("");
-        for (String s : strings) {
-            if (str1.contains(s)) {
-                str1 = str1.replaceFirst(s, "");
+        String charVault = str1;
+        String[] letters = str2.split("");
+        for (String ch : letters) {
+            if (charVault.contains(ch)) {
+                charVault = charVault.replaceFirst(ch, "");
             } else {
                 return false;
             }
